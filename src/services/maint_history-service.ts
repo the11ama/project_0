@@ -15,11 +15,11 @@ export function saveMaintHistory(maintHistory: any): Promise<MaintHistory> {
         maintHistory.printerId,
         maintHistory.engineCycles,
         maintHistory.maintPerformed,
-        new Date(maintHistory.MaintHistory)
+        new Date(maintHistory.maintDate)
     );
 
     if (maintHistory.printerId && maintHistory.engineCycles &&
-        maintHistory.maintPerformed && maintHistory.MaintHistory) {
+        maintHistory.maintPerformed && maintHistory.maintDate) {
         return maintDao.saveMaintHistory(newMaintHistory);
     } else {
         console.warn('This ticket is invalid');

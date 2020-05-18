@@ -12,14 +12,14 @@ export function getPrinterBySn(sn: number): Promise<Printer> {
 export function savePrinter(printer: any): Promise<Printer> {
     const newPrinter = new Printer(
         printer.sn,
-        printer.client_id,
+        printer.clientId,
         printer.make,
         printer.model,
         printer.locInBuilding,
         printer.status
     );
 
-    if(printer.sn && printer.client_id && printer.make &&
+    if(printer.sn && printer.clientId && printer.make &&
         printer.model && printer.locInBuilding && printer.status) {
             return printersDao.savePrinter(newPrinter);
         } else {
