@@ -45,13 +45,13 @@ export async function saveMaintHistory(maintHistory: MaintHistory): Promise<Main
 
 export async function patchMaintHistory(maintHistory: MaintHistory): Promise<MaintHistory> {
 
-    const sql = `UPDATE project_0.maint_history SET printer_id = COALESCE($1, printer_id), \
-                engine_cycles = COALESCE($2, engine_cycles), maint_performed = COALESCE($3, maint_performed), \
-                maint_date = COALESCE($4, maint_date) WHERE ticket = $5 RETURNING *`;
+    const sql = `UPDATE project_0.maint_history SET printer_id = COALESCE($2, printer_id), \
+                engine_cycles = COALESCE($3, engine_cycles), maint_performed = COALESCE($4, maint_performed), \
+                maint_date = COALESCE($5, maint_date) WHERE ticket = $1 RETURNING *`;
 
     const maintDate = maintHistory.maintDate && maintHistory.maintDate.toISOString();
 
-    const params = [maintHistory.ticket, maintHistory.engineCycles, maintHistory.maintPerformed, maintDate];
+    const params = [maintHistory.ticket, maintHistory.printerId, maintHistory.engineCycles, maintHistory.maintPerformed, maintDate];
 
     return db
         .query<MaintHistoryRow>(sql, params)

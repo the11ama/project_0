@@ -15,6 +15,7 @@ maintHistoryRouter.get('', (request, response, next) => {
             next();
         })
         .catch((err) => {
+            console.log(err);
             response.sendStatus(500);
             next();
         })
@@ -49,6 +50,7 @@ maintHistoryRouter.post('', (request, response, next) => {
             next();
         })
         .catch((err) => {
+            console.log(err);
             response.sendStatus(500);
             next();
         });
@@ -66,6 +68,7 @@ maintHistoryRouter.patch('', (request, response, next) => {
             }
         })
         .catch((err) => {
+            console.log(err);
             response.sendStatus(500);
         })
         .finally(() => {

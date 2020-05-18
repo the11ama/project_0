@@ -31,7 +31,7 @@ export function saveClient(client: any): Promise<Client> {
 
 export function patchClient(input: any): Promise<Client> {
     const client = new Client(
-        input.client_id,
+        input.clientId,
         input.city,
         input.fistName,
         input.lastName,

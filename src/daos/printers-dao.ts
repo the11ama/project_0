@@ -53,7 +53,7 @@ export async function patchPrinter(printer: Printer): Promise<Printer> {
                 status = COALESCE($6, status) WHERE sn = $1 RETURNING *`;
                 
 
-    const params = [printer.sn, printer.make, printer.model, printer.locInBuilding, printer.status];
+    const params = [printer.sn, printer.clientId, printer.make, printer.model, printer.locInBuilding, printer.status];
 
     return db
         .query<PrinterRow>(sql, params)

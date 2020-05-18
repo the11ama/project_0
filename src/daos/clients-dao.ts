@@ -48,12 +48,12 @@ VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
 export async function patchClient(client: Client): Promise<Client> {
 
     const sql = `UPDATE project_0.clients SET \
-    city = COALESCE($1, city), first_name = COALESCE($2, first_name), \
-    last_name = COALESCE($3, last_name), phone_number = COALESCE($4, phone_number), \
-    email = COALESCE($5, email), building_address = COALESCE($6, building_address) \
-    WHERE client_id = $7 RETURNING *`;
+    city = COALESCE($2, city), first_name = COALESCE($3, first_name), \
+    last_name = COALESCE($4, last_name), phone_number = COALESCE($5, phone_number), \
+    email = COALESCE($6, email), building_address = COALESCE($7, building_address) \
+    WHERE client_id = $1 RETURNING *`;
 
-    const params = [client.firstName, client.lastName, client.phoneNumber, client.email, client.buildingAddress];
+    const params = [client.clientId, client.city, client.firstName, client.lastName, client.phoneNumber, client.email, client.buildingAddress];
 
     return db
         .query<ClientRow>(sql, params)

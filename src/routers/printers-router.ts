@@ -14,7 +14,8 @@ printersRouter.get('', (request, response, next) => {
         }
         next();
     })
-    .catch((err) => {
+      .catch((err) => {
+          console.log(err);
         response.sendStatus(500);
         next();
     })
@@ -49,6 +50,7 @@ printersRouter.post('', (request, response, next) => {
             next();
         })
         .catch((err) => {
+            console.log(err);
             response.sendStatus(500);
             next();
         });
@@ -66,6 +68,7 @@ printersRouter.patch('', (request, response, next) => {
             }
         })
         .catch((err) => {
+            console.log(err);
             response.sendStatus(500);
         })
         .finally(() => {

@@ -15,6 +15,7 @@ clientsRouter.get('', (request, response, next) => {
             next();
         })
         .catch((err) => {
+            console.log(err);
             response.sendStatus(500);
             next();
         })
@@ -49,6 +50,7 @@ clientsRouter.post('', (request, response, next) => {
             next();
         })
         .catch((err) => {
+            console.log(err);
             response.sendStatus(500);
             next();
         });
@@ -66,6 +68,7 @@ clientsRouter.patch('', (request, response, next) => {
             }
         })
         .catch((err) => {
+            console.log(err);
             response.sendStatus(500);
         })
         .finally(() => {
