@@ -6,6 +6,30 @@ jest.mock("../../src/daos/clients-dao");
 
 const mockClientsDao = clientsDao as any;
 
+describe("getAllClients", () => {
+    test("successful get?", async () => {
+        expect.assertions(1);
+        mockClientsDao.getAllClients.mockImplementation(() => ({}));
+
+        const result = await clientsService.getAllClients();
+        expect(result).toBeTruthy();
+    });
+});
+
+describe("getAllClientsByClientId", () => {
+    test("successful get by clientId?", async () => {
+        expect.assertions(1);
+        mockClientsDao.getClientByClientId.mockImplementation(() => ({}));
+
+        const payload = {
+            clientId: 12
+        }
+        
+        const result = await clientsService.getClientByClientId(payload);
+        expect(result).toBeTruthy();
+    });
+});
+
 describe('saveClient', () => {
     test('will return 422, lacking city', async () => {
         expect.assertions(1);

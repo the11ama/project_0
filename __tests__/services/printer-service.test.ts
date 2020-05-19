@@ -6,6 +6,30 @@ jest.mock("../../src/daos/printers-dao");
 
 const mockPrintersDao = printersDao as any;
 
+describe("getAllPrinters", () => {
+    test("successful get?", async () => {
+        expect.assertions(1);
+        mockPrintersDao.getAllPrinters.mockImplementation(() => ({}));
+
+        const result = await printersService.getAllPrinters();
+        expect(result).toBeTruthy();
+    });
+});
+
+describe("getPrinterBySn", () => {
+    test("successful get by serial number?", async () => {
+        expect.assertions(1);
+        mockPrintersDao.getPrinterBySn.mockImplementation(() => ({}));
+
+        const payload = {
+            sn: 12
+        }
+
+        const result = await printersService.getPrinterBySn(payload);
+        expect(result).toBeTruthy();
+    });
+});
+
 describe('savePrinter', () => {
     test('will return 422, lacking sn', async () => {
         expect.assertions(1);

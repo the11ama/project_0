@@ -5,7 +5,7 @@ export function getAllMaintHistory(): Promise<MaintHistory[]> {
     return maintDao.getAllMaintHistory();
 }
 
-export function getMaintHistoryByTicket(ticket: number): Promise<MaintHistory> {
+export function getMaintHistoryByTicket(ticket: any): Promise<MaintHistory> {
     return maintDao.getMaintHistoryByTicket(ticket);
 }
 

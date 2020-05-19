@@ -5,7 +5,7 @@ export function getAllPrinters(): Promise<Printer[]> {
     return printersDao.getAllPrinters();
 }
 
-export function getPrinterBySn(sn: number): Promise<Printer> {
+export function getPrinterBySn(sn: any): Promise<Printer> {
     return printersDao.getPrinterBySn(sn);
 }
 

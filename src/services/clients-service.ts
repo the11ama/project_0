@@ -5,7 +5,7 @@ export function getAllClients(): Promise<Client[]> {
     return clientsDao.getAllClients();
 }
 
-export function getClientByClientId(clientId: number): Promise<Client> {
+export function getClientByClientId(clientId: any): Promise<Client> {
     return clientsDao.getClientByClientId(clientId);
 }
 

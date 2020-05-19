@@ -6,6 +6,30 @@ jest.mock("../../src/daos/maint_history-dao");
 
 const mockMaintHistoryDao = maintHistoryDao as any;
 
+describe("getAllMaintHistory", () => {
+    test("successful get?", async () => {
+        expect.assertions(1);
+        mockMaintHistoryDao.getAllMaintHistory.mockImplementation(() => ({}));
+
+        const result = await maintHistoryService.getAllMaintHistory();
+        expect(result).toBeTruthy();
+    });
+});
+
+describe("getMaintHistoryByTicket", () => {
+    test("successful get by serial number?", async () => {
+        expect.assertions(1);
+        mockMaintHistoryDao.getMaintHistoryByTicket.mockImplementation(() => ({}));
+
+        const payload = {
+            ticket: 3
+        }
+
+        const result = await maintHistoryService.getMaintHistoryByTicket(payload);
+        expect(result).toBeTruthy();
+    });
+});
+
 describe('saveMaintHistory', () => {
     test('will return 422, lacking printerId', async () => {
         expect.assertions(1);
