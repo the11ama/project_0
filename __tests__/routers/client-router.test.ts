@@ -94,8 +94,26 @@ describe("createClient", () => {
     });
 });
 
-/* describe("patchClient", () => {
+describe("patchClient", () => {
     test("200 should be returned", async () => {
+        mockClientsService.patchClient.mockImplementation(async () => ({}));
+        const payload = {
+            clientId: 22,
+            city: 114,
+            firstName: "Addy",
+            lastName: "Jeannin",
+            phoneNumber: "581-282-6053",
+            email: "ajeannin2@nationalgeographic.com",
+            buildingAddress: "08 Fordem Trail"
+        };
+
+        await request(app)
+            .patch("/clients")
+            .send(payload)
+            .expect(200)
+            .expect("content-type", "application/json; charset=utf-8");
+    });
+    test("404 should be returned", async () => {
         mockClientsService.patchClient.mockImplementation(async () => ({}));
         const payload = {
             clientId: 13,
@@ -107,13 +125,9 @@ describe("createClient", () => {
             buildingAddress: "08 Fordem Trail"
         };
 
-        await request(app)
-            .post("/clients")
-            .send(payload)
-            .expect(200)
-            .expect("content-type", "application/json; charset=utf-8");
+        await request(app).patch("/clients/13").send(payload).expect(404);
     });
-    test("500 returned when there's an error", async () => {
+    test("500 should be returned", async () => {
         mockClientsService.patchClient.mockImplementation(async () => {
             throw new Error();
         });
@@ -127,6 +141,6 @@ describe("createClient", () => {
             buildingAddress: "8020 Rosy Hill Ln",
         };
 
-        await request(app).post("/clients").send(payload).expect(500);
+        await request(app).patch("/clients").send(payload).expect(500);
     });
-}); */
+});
