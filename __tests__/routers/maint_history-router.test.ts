@@ -89,3 +89,48 @@ describe("createMaintHistory", () => {
         await request(app).post("/maint_history").send(payload).expect(500);
     });
 });
+
+describe("patchMaintHistory", () => {
+    test("200 should be returned", async () => {
+        mockMaintHistoryService.patchMaintHistory.mockImplementation(async () => ({}));
+        const payload = {
+            ticket: 31,
+            printerId: 262800,
+            engineCycles: 726732,
+            maintPerformed: "Someone done sent the wrong part, had to use power squirrel instead",
+            maintDate: "2020-01-25T05:00:00.000Z"
+        };
+
+        await request(app)
+            .patch("/maint_history")
+            .send(payload)
+            .expect(200)
+            .expect("content-type", "application/json; charset=utf-8");
+    });
+    test("404 should be returned", async () => {
+        mockMaintHistoryService.patchMaintHistory.mockImplementation(async () => ({}));
+        const payload = {
+            ticket: 31,
+            printerId: 262800,
+            engineCycles: 726732,
+            maintPerformed: "Someone done sent the wrong part, had to use power squirrel instead",
+            maintDate: "2020-01-25T05:00:00.000Z"
+        };
+
+        await request(app).patch("/maint_history/31").send(payload).expect(404);
+    });
+    test("500 should be returned", async () => {
+        mockMaintHistoryService.patchMaintHistory.mockImplementation(async () => {
+            throw new Error();
+        });
+
+        const payload = {
+            printerId: 262800,
+            engineCycles: 726732,
+            maintPerformed: "Someone done sent the wrong part, had to use power squirrel instead",
+            maintDate: "2020-01-25T05:00:00.000Z"
+        };
+
+        await request(app).patch("/maint_history").send(payload).expect(500);
+    });
+});

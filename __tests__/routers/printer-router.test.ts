@@ -92,3 +92,51 @@ describe("createPrinter", () => {
         await request(app).post("/printers").send(payload).expect(500);
     });
 });
+
+describe("patchPrinter", () => {
+    test("200 should be returned", async () => {
+        mockPrintersService.patchPrinter.mockImplementation(async () => ({}));
+        const payload = {
+            sn: 437279,
+            clientId: 13,
+            make: "Mercury",
+            model: "Monterey",
+            locInBuilding: "Computers",
+            status: "working"
+        };
+
+        await request(app)
+            .patch("/printers")
+            .send(payload)
+            .expect(200)
+            .expect("content-type", "application/json; charset=utf-8");
+    });
+    test("404 should be returned", async () => {
+        mockPrintersService.patchPrinter.mockImplementation(async () => ({}));
+        const payload = {
+            sn: 437279,
+            clientId: 13,
+            make: "Mercury",
+            model: "Monterey",
+            locInBuilding: "Computers",
+            status: "working"
+        };
+
+        await request(app).patch("/printers/13").send(payload).expect(404);
+    });
+    test("500 should be returned", async () => {
+        mockPrintersService.patchPrinter.mockImplementation(async () => {
+            throw new Error();
+        });
+
+        const payload = {
+            clientId: 13,
+            make: "Mercury",
+            model: "Monterey",
+            locInBuilding: "Computers",
+            status: "working"
+        };
+
+        await request(app).patch("/printers").send(payload).expect(500);
+    });
+});
