@@ -8,7 +8,7 @@ export class Client {
     buildingAddress: string;
 
     static from(obj: ClientRow): Client {
-        const printer = new Client(
+        const client = new Client(
             obj.client_id,
             obj.city,
             obj.first_name,
@@ -17,7 +17,7 @@ export class Client {
             obj.email,
             obj.building_address
         )
-        return printer;
+        return client;
     }
 
     constructor(
