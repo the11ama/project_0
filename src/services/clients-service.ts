@@ -33,7 +33,7 @@ export function patchClient(input: any): Promise<Client> {
     const client = new Client(
         input.clientId,
         input.city,
-        input.fistName,
+        input.firstName,
         input.lastName,
         input.phoneNumber,
         input.email,
