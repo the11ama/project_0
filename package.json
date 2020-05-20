@@ -1,4 +1,9 @@
 {
+  "jest": {
+    "collectCoverageFrom": [
+      "!**/daos/**"
+    ]
+  },
   "name": "project_0",
   "version": "1.0.0",
   "description": "First in-class project",

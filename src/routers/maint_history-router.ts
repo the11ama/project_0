@@ -7,11 +7,7 @@ maintHistoryRouter.get('', (request, response, next) => {
     maintHistoryService
         .getAllMaintHistory()
         .then((maintHistory) => {
-            if (!maintHistory) {
-                response.sendStatus(404);
-            } else {
-                response.json(maintHistory);
-            }
+            response.json(maintHistory);
             next();
         })
         .catch((err) => {

@@ -19,12 +19,6 @@ describe("getAllMaintHistory", () => {
             .expect(200)
             .expect("content-type", "application/json; charset=utf-8");
     });
-    test("Returns a 404", async () => {
-        mockMaintHistoryService.getAllMaintHistory.mockImplementation(async () => []);
-        await request(app)
-            .get("/printers")
-            .expect(404);
-    })
     test("Returns a 500", async () => {
         mockMaintHistoryService.getAllMaintHistory.mockImplementation(async () => {
             throw new Error();
@@ -108,7 +102,7 @@ describe("patchMaintHistory", () => {
             .expect("content-type", "application/json; charset=utf-8");
     });
     test("404 should be returned", async () => {
-        mockMaintHistoryService.patchMaintHistory.mockImplementation(async () => ({}));
+        mockMaintHistoryService.patchMaintHistory.mockImplementation(async () => undefined);
         const payload = {
             ticket: 31,
             printerId: 262800,
@@ -117,7 +111,7 @@ describe("patchMaintHistory", () => {
             maintDate: "2020-01-25T05:00:00.000Z"
         };
 
-        await request(app).patch("/maint_history/31").send(payload).expect(404);
+        await request(app).patch("/maint_history").send(payload).expect(404);
     });
     test("500 should be returned", async () => {
         mockMaintHistoryService.patchMaintHistory.mockImplementation(async () => {

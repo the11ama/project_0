@@ -19,12 +19,6 @@ describe("getAllPrinters", () => {
             .expect(200)
             .expect("content-type", "application/json; charset=utf-8");
     });
-    test("Returns a 404", async () => {
-        mockPrintersService.getAllPrinters.mockImplementation(async () => []);
-        await request(app)
-            .get("/clients")
-            .expect(404);
-    })
     test("Returns a 500", async () => {
         mockPrintersService.getAllPrinters.mockImplementation(async () => {
             throw new Error();
@@ -112,7 +106,7 @@ describe("patchPrinter", () => {
             .expect("content-type", "application/json; charset=utf-8");
     });
     test("404 should be returned", async () => {
-        mockPrintersService.patchPrinter.mockImplementation(async () => ({}));
+        mockPrintersService.patchPrinter.mockImplementation(async () => undefined);
         const payload = {
             sn: 437279,
             clientId: 13,
@@ -122,7 +116,7 @@ describe("patchPrinter", () => {
             status: "working"
         };
 
-        await request(app).patch("/printers/13").send(payload).expect(404);
+        await request(app).patch("/printers").send(payload).expect(404);
     });
     test("500 should be returned", async () => {
         mockPrintersService.patchPrinter.mockImplementation(async () => {

@@ -6,13 +6,9 @@ export const printersRouter = express.Router();
 printersRouter.get('', (request, response, next) => {
   printersService
     .getAllPrinters()
-    .then((printer) => {
-        if (!printer) {
-            response.sendStatus(404);
-        } else {
-            response.json(printer);
-        }
-        next();
+      .then((printer) => {
+          response.json(printer);
+          next();
     })
       .catch((err) => {
           console.log(err);

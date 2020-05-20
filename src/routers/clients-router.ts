@@ -7,11 +7,7 @@ clientsRouter.get('', (request, response, next) => {
     clientsService
         .getAllClients()
         .then((client) => {
-            if (!client) {
-                response.sendStatus(404);
-            } else {
-                response.json(client);
-            }
+            response.json(client);
             next();
         })
         .catch((err) => {

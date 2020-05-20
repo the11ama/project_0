@@ -19,12 +19,6 @@ describe("getAllClients", () => {
             .expect(200)
             .expect("content-type", "application/json; charset=utf-8");
     });
-    test("Returns a 404, if I can manage it.", async () => {
-        mockClientsService.getAllClients.mockImplementation(async () => []);
-        await request(app)
-            .get("/printers")
-            .expect(404);
-    })
     test("Returns a 500, maybe", async () => {
         mockClientsService.getAllClients.mockImplementation(async () => {
             throw new Error();
@@ -114,7 +108,7 @@ describe("patchClient", () => {
             .expect("content-type", "application/json; charset=utf-8");
     });
     test("404 should be returned", async () => {
-        mockClientsService.patchClient.mockImplementation(async () => ({}));
+        mockClientsService.patchClient.mockImplementation(async () => undefined);
         const payload = {
             clientId: 13,
             city: 114,
@@ -125,7 +119,7 @@ describe("patchClient", () => {
             buildingAddress: "08 Fordem Trail"
         };
 
-        await request(app).patch("/clients/13").send(payload).expect(404);
+        await request(app).patch("/clients").send(payload).expect(404);
     });
     test("500 should be returned", async () => {
         mockClientsService.patchClient.mockImplementation(async () => {
